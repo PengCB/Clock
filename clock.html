@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clock</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f4f7f0;
+    }
+
+    .clock-container {
+      border: 5px solid #989a96;
+      border-radius: 30px;
+      width: 120px;
+      height: 120px;
+      background: -webkit-linear-gradient(-90deg, #cbccca 50%, #babbb9 50%);
+    }
+
+    .clock-v-align {
+      padding: 9.090909% 0;
+      height: 100%;
+    }
+
+    .clock {
+      position: relative;
+      border: 5px solid #989a96;
+      border-radius: 50%;
+      margin: 0 auto;
+      width: 81.818181%;
+      height: 100%;
+      background: #fafafa;
+    }
+
+    .hoverclockcentre {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+
+    .hoverclockanchor {
+      position: absolute;
+      top: 0;
+      left: -1px;
+
+      width: 2px;
+      height: 4px;
+      background: #b4b4b4;
+
+      -webkit-transform-origin: 1px 0;
+      -moz-transform-origin: 1px 0;
+      -o-transform-origin: 1px 0;
+      transform-origin: 1px 0;
+    }
+
+    .num1 {
+      -webkit-transform: rotate(30deg) translateY(-33px);
+      -moz-transform: rotate(30deg) translateY(-33px);
+      -o-transform: rotate(30deg) translateY(-33px);
+      transform: rotate(30deg) translateY(-33px);
+    }
+
+    .num2 {
+      -webkit-transform: rotate(60deg) translateY(-33px);
+      -moz-transform: rotate(60deg) translateY(-33px);
+      -o-transform: rotate(60deg) translateY(-33px);
+      transform: rotate(60deg) translateY(-33px);
+    }
+
+    .num3 {
+      -webkit-transform: rotate(90deg) translateY(-33px);
+      -moz-transform: rotate(90deg) translateY(-33px);
+      -o-transform: rotate(90deg) translateY(-33px);
+      transform: rotate(90deg) translateY(-33px);
+    }
+
+    .num4 {
+      -webkit-transform: rotate(120deg) translateY(-33px);
+      -moz-transform: rotate(120deg) translateY(-33px);
+      -o-transform: rotate(120deg) translateY(-33px);
+      transform: rotate(120deg) translateY(-33px);
+    }
+
+    .num5 {
+      -webkit-transform: rotate(150deg) translateY(-33px);
+      -moz-transform: rotate(150deg) translateY(-33px);
+      -o-transform: rotate(150deg) translateY(-33px);
+      transform: rotate(150deg) translateY(-33px);
+    }
+
+    .num6 {
+      -webkit-transform: rotate(180deg) translateY(-33px);
+      -moz-transform: rotate(180deg) translateY(-33px);
+      -o-transform: rotate(180deg) translateY(-33px);
+      transform: rotate(180deg) translateY(-33px);
+    }
+
+    .num7 {
+      -webkit-transform: rotate(210deg) translateY(-33px);
+      -moz-transform: rotate(210deg) translateY(-33px);
+      -o-transform: rotate(210deg) translateY(-33px);
+      transform: rotate(210deg) translateY(-33px);
+    }
+
+    .num8 {
+      -webkit-transform: rotate(240deg) translateY(-33px);
+      -moz-transform: rotate(240deg) translateY(-33px);
+      -o-transform: rotate(240deg) translateY(-33px);
+      transform: rotate(240deg) translateY(-33px);
+    }
+
+    .num9 {
+      -webkit-transform: rotate(270deg) translateY(-33px);
+      -moz-transform: rotate(270deg) translateY(-33px);
+      -o-transform: rotate(270deg) translateY(-33px);
+      transform: rotate(270deg) translateY(-33px);
+    }
+
+    .num10 {
+      -webkit-transform: rotate(300deg) translateY(-33px);
+      -moz-transform: rotate(300deg) translateY(-33px);
+      -o-transform: rotate(300deg) translateY(-33px);
+      transform: rotate(300deg) translateY(-33px);
+    }
+
+    .num11 {
+      -webkit-transform: rotate(330deg) translateY(-33px);
+      -moz-transform: rotate(330deg) translateY(-33px);
+      -o-transform: rotate(330deg) translateY(-33px);
+      transform: rotate(330deg) translateY(-33px);
+    }
+
+    .num12 {
+      -webkit-transform: rotate(0deg) translateY(-33px);
+      -moz-transform: rotate(0deg) translateY(-33px);
+      -o-transform: rotate(0deg) translateY(-33px);
+      transform: rotate(0deg) translateY(-33px);
+    }
+
+    .m-round,
+    .s-round {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+    }
+
+    .m-round {
+      margin: -9.375%;
+      width: 18.75%;
+      height: 18.75%;
+      background: #333;
+    }
+
+    .s-round {
+      margin: -5%;
+      width: 10%;
+      height: 10%;
+      background: #e40000;
+    }
+
+    .hour {
+      border: 5px solid transparent;
+      border-top: 0;
+      border-bottom: 15px solid #333333;
+      margin: -15px -5px;
+
+      -webkit-transform-origin: 5px 15px;
+      -moz-transform-origin: 5px 15px;
+      -o-transform-origin: 5px 15px;
+      transform-origin: 5px 15px;
+
+      -webkit-animation-duration: 43200s;
+      -moz-animation-duration: 43200s;
+      -o-animation-duration: 43200s;
+      animation-duration: 43200s;
+    }
+
+    .minute {
+      border: 3px solid transparent;
+      border-top: 0;
+      border-bottom: 25px solid #333333;
+      margin: -25px -3px;
+
+      -webkit-transform-origin: 3px 25px;
+      -moz-transform-origin: 3px 25px;
+      -o-transform-origin: 3px 25px;
+      transform-origin: 3px 25px;
+
+      -webkit-animation-duration: 3600s;
+      -moz-animation-duration: 3600s;
+      -o-animation-duration: 3600s;
+      animation-duration: 3600s;
+    }
+
+    .second {
+      margin-top: -30px;
+      margin-left: -1px;
+      width: 2px;
+      height: 40px;
+      background: #e40000;
+
+      -webkit-transform-origin: 1px 30px;
+      -moz-transform-origin: 1px 30px;
+      -o-transform-origin: 1px 30px;
+      transform-origin: 1px 30px;
+
+      -webkit-animation-duration: 60s;
+      -moz-animation-duration: 60s;
+      -o-animation-duration: 60s;
+      animation-duration: 60s;
+    }
+
+    .hour,
+    .minute,
+    .second {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      -webkit-animation-timing-function: linear;
+      -moz-animation-timing-function: linear;
+      -o-animation-timing-function: linear;
+      animation-timing-function: linear;
+
+      -webkit-animation-fill-mode: both;
+      -moz-animation-fill-mode: both;
+      -o-animation-fill-mode: both;
+      animation-fill-mode: both;
+
+      -webkit-animation-iteration-count: infinite;
+      -moz-animation-iteration-count: infinite;
+      -o-animation-iteration-count: infinite;
+      animation-iteration-count: infinite;
+    }
+
+    .hour.active {
+      -webkit-animation-name: HourHandRotate;
+      -moz-animation-name: HourHandRotate;
+      -o-animation-name: HourHandRotate;
+      animation-name: HourHandRotate;
+    }
+
+    .minute.active {
+      -webkit-animation-name: MinuteHandRotate;
+      -moz-animation-name: MinuteHandRotate;
+      -o-animation-name: MinuteHandRotate;
+      animation-name: MinuteHandRotate;
+    }
+
+    .second.active {
+      -webkit-animation-name: SecondHandRotate;
+      -moz-animation-name: SecondHandRotate;
+      -o-animation-name: SecondHandRotate;
+      animation-name: SecondHandRotate;
+    }
+
+  </style>
+  <style>
+    /* Second */
+    @-webkit-keyframes SecondHandRotate {
+      from {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      to {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    @-moz-keyframes SecondHandRotate {
+      from {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      to {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    @-o-keyframes SecondHandRotate {
+      from {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      to {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes SecondHandRotate {
+      from {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      to {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Minute */
+    @-webkit-keyframes MinuteHandRotate {
+      from {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      to {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    @-moz-keyframes MinuteHandRotate {
+      from {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      to {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    @-o-keyframes MinuteHandRotate {
+      from {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      to {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes MinuteHandRotate {
+      from {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      to {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Hour */
+    @-webkit-keyframes HourHandRotate {
+      from {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      to {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    @-moz-keyframes HourHandRotate {
+      from {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      to {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    @-o-keyframes HourHandRotate {
+      from {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      to {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes HourHandRotate {
+      from {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      to {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+
+</head>
+<body>
+
+<div class="clock-container" id="clock">
+  <div class="clock-v-align">
+    <div class="clock">
+
+
+      <div class="hoverclockcentre">
+        <span class="hoverclockanchor num1"></span>
+        <span class="hoverclockanchor num2"></span>
+        <span class="hoverclockanchor num3"></span>
+        <span class="hoverclockanchor num4"></span>
+        <span class="hoverclockanchor num5"></span>
+        <span class="hoverclockanchor num6"></span>
+        <span class="hoverclockanchor num7"></span>
+        <span class="hoverclockanchor num8"></span>
+        <span class="hoverclockanchor num9"></span>
+        <span class="hoverclockanchor num10"></span>
+        <span class="hoverclockanchor num11"></span>
+        <span class="hoverclockanchor num12"></span>
+      </div>
+
+      <div class="hands">
+        <div class="m-round"></div>
+
+        <div class="hour"></div>
+        <div class="minute"></div>
+        <div class="second"></div>
+
+        <div class="s-round"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="dateMsg">
+  <div class="dateEn"></div>
+  <div class="dateCn"></div>
+</div>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+<script>
+  (function () {
+
+    var clock = {
+
+      VERSION: "0.1.0",
+
+      // 世界各地时间
+      worldDates: {
+        // 世界标准时间
+        UTC: function () {
+          var date = new Date();
+          date.setTime(date.getTime() + date.getTimezoneOffset() * 60000);
+          return date;
+        },
+        // 中国北京时间
+        BeiJingDate: function () {
+          var date = new Date(),
+            offset = 8,
+            utc = clock.worldDates.UTC();
+          date.setTime(utc.getTime() + (3600000 * offset));
+          return date;
+        },
+        // 美国纽约时间
+        NewYorkDate: function () {
+          var utc = clock.worldDates.UTC(),
+            offset = -5,
+            date = new Date(),
+            summerDateStart = new Date(date.getFullYear(), 3, 8, 2, 0, 0, 0),
+            summerDateEnd = new Date(date.getFullYear(), 11, 1, 2, 0, 0, 0),
+            nonSummerTime = utc.getTime() + (3600000 * offset);
+          date.setTime((nonSummerTime >= summerDateStart.getTime() && nonSummerTime <= summerDateEnd.getTime()) ? (nonSummerTime + 3600000) : nonSummerTime);
+          return date;
+        },
+        // 加拿大温哥华时间
+        VancouverDate: function () {
+          var utc = clock.worldDates.UTC(),
+            offset = -8,
+            date = new Date(),
+            summerDateStart = new Date(date.getFullYear(), 3, 8, 2, 0, 0, 0),
+            summerDateEnd = new Date(date.getFullYear(), 11, 1, 2, 0, 0, 0),
+            nonSummerTime = utc.getTime() + (3600000 * offset);
+          date.setTime((nonSummerTime >= summerDateStart.getTime() && nonSummerTime <= summerDateEnd.getTime()) ? (nonSummerTime + 3600000) : nonSummerTime);
+          return date;
+        },
+        // 日本东京时间
+        TokyoDate: function () {
+          var date = new Date(),
+            offset = 9,
+            utc = clock.worldDates.UTC();
+          date.setTime(utc.getTime() + (3600000 * offset));
+          return date;
+        },
+        MoscowDate: function () {
+          var date = new Date(),
+            offset = 3,
+            utc = clock.worldDates.UTC();
+          date.setTime(utc.getTime() + (3600000 * offset));
+          return date;
+        },
+        LondonDate: function () {
+          var utc = clock.worldDates.UTC(),
+            offset = 0,
+            date = new Date(),
+            summerDateStart = new Date(date.getFullYear(), 3, 29, 1, 0, 0, 0),
+            summerDateEnd = new Date(date.getFullYear(), 10, 25, 2, 0, 0, 0),
+            nonSummerTime = utc.getTime() + (3600000 * offset);
+          date.setTime((nonSummerTime >= summerDateStart.getTime() && nonSummerTime <= summerDateEnd.getTime()) ? (nonSummerTime + 3600000) : nonSummerTime);
+          return date;
+        },
+        ParisDate: function () {
+          var utc = clock.worldDates.UTC(),
+            offset = 1,
+            date = new Date(),
+            summerDateStart = new Date(date.getFullYear(), 3, 29, 1, 0, 0, 0),
+            summerDateEnd = new Date(date.getFullYear(), 10, 25, 2, 0, 0, 0),
+            nonSummerTime = utc.getTime() + (3600000 * offset);
+          date.setTime((nonSummerTime >= summerDateStart.getTime() && nonSummerTime <= summerDateEnd.getTime()) ? (nonSummerTime + 3600000) : nonSummerTime);
+          return date;
+        },
+        SydneyDate: function () {
+          var date = new Date(),
+            offset = 10,
+            utc = clock.worldDates.UTC();
+          date.setTime(utc.getTime() + (3600000 * offset));
+          return date;
+        }
+
+      },
+
+
+      BaseData: function (date) {
+        // 获取时间的时分秒
+        var date = date || new Date();
+
+        var h = {};
+
+        h.hour = date.getHours() >= 12 ? date.getHours() - 12 : date.getHours();
+        h.minute = date.getMinutes();
+        h.second = date.getSeconds();
+
+        h.Rotate_hour = (h.hour + h.minute / 60 + h.second / 3600) * 30;
+        h.Rotate_minute = (h.minute + h.second / 60) * 6;
+        h.Rotate_second = (h.second) * 6;
+
+        h.hourAnimateName = "HourHandRotate";
+        h.minuteAnimateName = "MinuteHandRotate";
+        h.secondAnimateName = "SecondHandRotate";
+        return h;
+      },
+      // 更新 css3 animation keyframes
+      updateRotateRule: function (cssRules, handRotate) {
+        // 修改css3动画
+        var from = cssRules
+          .findRule("from")
+          .cssText
+          .replace("(0deg)", "(" + handRotate + "deg)")
+          .replace("(0deg)", "(" + handRotate + "deg)")
+          .replace("(0deg)", "(" + handRotate + "deg)")
+          .replace("(0deg)", "(" + handRotate + "deg)");
+        var to = cssRules
+          .findRule("to")
+          .cssText
+          .replace("360", handRotate + 360)
+          .replace("360", handRotate + 360)
+          .replace("360", handRotate + 360)
+          .replace("360", handRotate + 360);
+
+        // 删除原有css3动画规则
+        cssRules.deleteRule("from");
+        cssRules.deleteRule("to");
+
+        // 插入新css3动画规则
+        if (cssRules.insertRule) {
+          cssRules.insertRule(from);
+          cssRules.insertRule(to);
+        } else if (cssRules.appendRule) {//Firefox supported
+          cssRules.appendRule(from);
+          cssRules.appendRule(to);
+        }
+      },
+
+
+      //init the clock
+      init: function ($el, date) {
+        var BaseData = clock.BaseData(date);
+        var ss = document.styleSheets;
+
+        for (var i = ss.length - 1; i >= 0; i--) {
+          try {
+            var s = ss[i],
+              rs = s.cssRules ? s.cssRules :
+                s.rules ? s.rules : [];
+            for (var j = rs.length - 1; j >= 0; j--) {
+              if (
+                rs[j].type === window.CSSRule.WEBKIT_KEYFRAMES_RULE ||
+                rs[j].type === window.CSSRule.MOZ_KEYFRAMES_RULE ||
+                rs[j].type === window.CSSRule.O_KEYFRAMES_RULE
+              ) {
+                switch (rs[j].name) {
+                  case BaseData.secondAnimateName:
+                    clock.updateRotateRule(rs[j], BaseData.Rotate_second);
+                    break;
+                  case BaseData.minuteAnimateName:
+                    clock.updateRotateRule(rs[j], BaseData.Rotate_minute);
+                    break;
+                  case BaseData.hourAnimateName:
+                    clock.updateRotateRule(rs[j], BaseData.Rotate_hour);
+                    break;
+                }
+              }
+            }
+          }
+          catch (e) {
+          }
+        }
+        clock.start($el, date, BaseData);
+      },
+
+
+      //start the clock
+      start: function ($el, date, BaseData) {
+        var $h = $el.find('.hands .hour'),
+          $m = $el.find('.hands .minute'),
+          $s = $el.find('.hands .second');
+
+        $h.addClass('active');
+        $m.addClass('active');
+        $s.addClass('active');
+
+
+        // 时间信息
+        var daysEn = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          daysCn = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
+          dayTimeEn = ["AM", "PM"],
+          dayTimeCn = ["零晨", "早上", "中午", "下午", "晚上"],
+
+          getDayTimeCn = function () {
+            var hour = date.getHours();
+            if (hour >= 0 && hour < 5) {
+              return dayTimeCn[0];
+            } else if (hour >= 5 && hour < 11) {
+              return dayTimeCn[1];
+            } else if (hour >= 11 && hour < 13) {
+              return dayTimeCn[2];
+            } else if (hour >= 13 && hour < 18) {
+              return dayTimeCn[3];
+            } else if (hour >= 18 && hour <= 23) {
+              return dayTimeCn[4];
+            }
+          };
+
+
+        var $date_En = $(".dateMsg .dateEn"),
+          $date_Cn = $(".dateMsg .dateCn"),
+
+          date_En_msg = date.getFullYear().toString() + "/"
+            + (date.getMonth() + 1).toString() + "/"
+            + date.getDate().toString() + " "
+            + (date.getHours() >= 12 ? dayTimeEn[1] : dayTimeEn[0]) + " "
+            + daysEn[date.getDay()],
+          date_Cn_msg = date.getFullYear().toString() + "年"
+            + (date.getMonth() + 1).toString() + "月"
+            + date.getDate().toString() + "日"
+            + getDayTimeCn() + " "
+            + daysCn[date.getDay()];
+
+
+        $date_En.html(date_En_msg);
+        $date_Cn.html(date_Cn_msg);
+
+      }
+    };
+
+    $(document).ready(function () {
+      clock.init($('#clock'), clock.worldDates.BeiJingDate());
+    });
+
+  })();
+
+
+</script>
+</body>
+</html>

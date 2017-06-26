@@ -1,0 +1,271 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html, body, div, p,
+h1, h2, h3, h4, h5, h6,
+dl, dt, dd, ul, ol, li,
+blockquote, pre, hr, figure,
+table, caption, th, td,
+form, fieldset, legend, input, button, textarea {
+  margin: 0;
+  padding: 0;
+}
+
+header, footer, section, article, aside, nav, address, figure, figcaption, details {
+  display: block;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a, button {
+  cursor: pointer;
+}
+
+a, a:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+html, body {
+  font: 12px/1.5 "microsoft yahei", Arial, Helvetica, sans-serif;
+  color: #000;
+  outline: 0;
+}
+
+img {
+  vertical-align: middle;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
+
+.date-container {
+  margin: 200px auto 0;
+
+  border-radius: 30px;
+  width:120px;
+  background: #eee;
+}
+.clock-container {
+  border: 5px solid #989a96;
+  border-radius: 30px;
+  width: 120px;
+  height: 120px;
+  background: -webkit-linear-gradient(to bottom, #cbccca 50%, #babbb9 50%);
+  background: -moz-linear-gradient(to bottom, #cbccca 50%, #babbb9 50%);
+  background: -o-linear-gradient(to bottom, #cbccca 50%, #babbb9 50%);
+  background: linear-gradient(to bottom, #cbccca 50%, #babbb9 50%);
+  background:-webkit-gradient(linear,0% 50%, 0% 51%, from(#cbccca), to(#babbb9), color-stop(0.5,#cbccca),color-stop(0.5,#babbb9));
+}
+
+.clock-v-align {
+  padding: 9.090909% 0;
+  height: 100%;
+}
+
+.clock {
+  position: relative;
+  border: 5px solid #989a96;
+  border-radius: 50%;
+  margin: 0 auto;
+  width: 81.818181%;
+  height: 100%;
+  background: #fafafa;
+}
+
+.dial {
+
+}
+
+.dial i {
+  position: absolute;
+  top: 7px;
+  bottom: 7px;
+  left: 50%;
+  margin-left: -1px;
+  width: 2px;
+}
+
+.dial i:before,
+.dial i:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 4px;
+  background: #b4b4b4;
+}
+
+.dial i:before {
+  top: 0;
+}
+
+.dial i:after {
+  bottom: 0;
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.dial i:nth-child(1) {
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.dial i:nth-child(2) {
+  -webkit-transform: rotate(30deg);
+  -moz-transform: rotate(30deg);
+  -o-transform: rotate(30deg);
+  transform: rotate(30deg);
+}
+
+.dial i:nth-child(3) {
+  -webkit-transform: rotate(60deg);
+  -moz-transform: rotate(60deg);
+  -o-transform: rotate(60deg);
+  transform: rotate(60deg);
+}
+
+.dial i:nth-child(4) {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.dial i:nth-child(5) {
+  -webkit-transform: rotate(120deg);
+  -moz-transform: rotate(120deg);
+  -o-transform: rotate(120deg);
+  transform: rotate(120deg);
+}
+
+.dial i:nth-child(6) {
+  -webkit-transform: rotate(150deg);
+  -moz-transform: rotate(150deg);
+  -o-transform: rotate(150deg);
+  transform: rotate(150deg);
+}
+
+.hour,
+.minute,
+.second {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  background: #333;
+}
+
+.hour,
+.minute {
+  margin: -9.375% 0 0 -9.375%;
+  width: 18.75%;
+  height: 18.75%;
+}
+
+.hour:before,
+.minute:before,
+.second:before {
+  content: '';
+  display: block;
+  position: absolute;
+}
+
+.hour:before {
+  bottom: 9px;
+  left: 2.5px;
+  border: 5px solid transparent;
+  border-top: 0;
+  border-bottom: 15px solid #333;
+}
+
+.minute:before {
+  bottom: 50%;
+  left: 4.5px;
+  border: 3px solid transparent;
+  border-top: 0;
+  border-bottom: 25px solid #333;
+}
+
+.second {
+  margin: -5%;
+  width: 10%;
+  height: 10%;
+  background: #e40000;
+}
+
+.second:before {
+  bottom: -5px;
+  left: 3px;
+  width: 2px;
+  height: 40px;
+  background: #e40000;
+}
+
+.hour.active,
+.minute.active,
+.second.active{
+  display: block;
+}
+
+.date-details {
+  width: 120px;
+  text-align: center;
+}
+
+
+.worldDates {
+  width:120px;
+  text-align: center;
+}
+.worldDates:hover {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  background: #cbccca;
+}
+.worldDates h3 {
+  border: 5px solid #989a96;
+  border-radius: 30px;
+  background: #babbb9;
+  cursor: default;
+}
+.worldDates ul {
+  display: none;
+  border: 5px solid #989a96;
+  border-top: 0;
+  background: #cbccca;
+}
+.worldDates.cur h3 {
+  border-bottom: 0;
+  border-radius: 15px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.worldDates ul li {
+  padding:3px 0;
+  cursor: pointer;
+}
+.worldDates ul li.cur,
+.worldDates ul li:hover {
+  background: #babbb9 ;
+}

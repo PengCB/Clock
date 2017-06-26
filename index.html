@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clock_All_Browser</title>
+
+  <link rel="stylesheet" href="css/clock_all.css">
+</head>
+<body>
+
+
+<div class="date-container">
+  <div class="clock-container" id="clock">
+    <div class="clock-v-align">
+      <div class="clock">
+        <div class="dial">
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+        <div class="hands">
+          <div class="hour"></div>
+          <div class="minute"></div>
+          <div class="second"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="date-details"></div>
+
+  <div class="worldDates">
+    <h3>中国-北京</h3>
+    <ul>
+      <li data-date="UTC">世界标准时间</li>
+      <li data-date="SydneyDate">澳大利亚-悉尼</li>
+      <li data-date="TokyoDate">日本-东京</li>
+      <li class="cur" data-date="BeiJingDate">中国-北京</li>
+      <li data-date="MoscowDate">俄罗斯-莫斯科</li>
+      <li data-date="ParisDate">法国-巴黎</li>
+      <li data-date="LondonDate">英国-伦敦</li>
+      <li data-date="NewYorkDate">美国-纽约</li>
+      <li data-date="VancouverDate">加拿大-温哥华</li>
+    </ul>
+  </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+<script src="js/clock_all.js"></script>
+</body>
+</html>
