@@ -88,7 +88,45 @@
         return date;
       }
     },
+    worldDates_list_data:[
+      {
+        date:'UTC',
+        name:'世界标准时间'
+      },
+      {
+        date:'SydneyDate',
+        name:'大利亚-悉尼'
+      },
+      {
+        date:'TokyoDate',
+        name:'日本-东京'
+      },
+      {
+        date:'BeiJingDate',
+        name:'中国-北京'
+      },
+      {
+        date:'MoscowDate',
+        name:'俄罗斯-莫斯科'
+      },
+      {
+        date:'ParisDate',
+        name:'法国-巴黎'
+      },
+      {
+        date:'LondonDate',
+        name:'英国-伦敦'
+      },
+      {
+        date:'NewYorkDate',
+        name:'美国-纽约'
+      },
+      {
+        date:'VancouverDate',
+        name:'加拿大-温哥华'
+      }
 
+    ],
     date: function () {
       // 更新时间，初始时间为北京时间
       return clock.worldDates.BeiJingDate();
@@ -134,6 +172,17 @@
         "<p>" + getDayTimeCn() + " " + h + ":" + m + ":" + s + "</p>" +
         "<p>" + daysCn[date.getDay()] + "</p>"
       );
+    },
+
+    create_worldDates_list:function($el){
+      var $el = $el || clock.$el;
+      var html = '';
+      var world_data = clock.worldDates_list_data;
+      for(var i=0;i<world_data.length;i++){
+        html += '<li data-date="' + world_data[i].date + '">' + world_data[i].name + '</li>'
+      }
+
+      $el.find('.worldDates ul').html(html);
     },
 
     location_date: function () {
@@ -200,6 +249,7 @@
 
     start: function () {
       // 启动时钟
+      clock.create_worldDates_list();
       clock.location_date();
       clock.active();
       clock.worldDates_list();
