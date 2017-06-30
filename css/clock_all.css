@@ -65,6 +65,7 @@ body {
 .clock-container {
   border: 5px solid #989a96;
   border-radius: 30px;
+  margin: 0 auto;
   width: 120px;
   height: 120px;
   background: -webkit-linear-gradient(to bottom, #cbccca 50%, #babbb9 50%);
@@ -228,14 +229,8 @@ body {
   display: block;
 }
 
-.date-details {
-  width: 120px;
-  text-align: center;
-}
-
-
+.date-details,
 .worldDates {
-  width:120px;
   text-align: center;
 }
 .worldDates:hover {

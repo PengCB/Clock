@@ -1,6 +1,8 @@
 (function () {
 
   var clock = {
+    $el: $('#clock'),
+    timer: 0,
     // 世界各地时间
     worldDates: {
       // 世界标准时间
@@ -88,10 +90,12 @@
     },
 
     date: function () {
+      // 更新时间，初始时间为北京时间
       return clock.worldDates.BeiJingDate();
     },
 
     time: function (date) {
+      // 旋转角度
       var d = date || new Date();
       var h = (d.getHours() + d.getMinutes() / 60) / 12 * 360;
       var m = (d.getMinutes() + d.getSeconds() / 60) / 60 * 360;
@@ -101,6 +105,7 @@
       $('#clock .hands .second').css('transform', 'rotate(' + s + 'deg)').addClass('active');
     },
     msg: function (date) {
+      // 时间信息
       var daysEn = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
         daysCn = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
         dayTimeEn = ["AM", "PM"],
@@ -130,15 +135,18 @@
         "<p>" + daysCn[date.getDay()] + "</p>"
       );
     },
-    location_date:function(){
+
+    location_date: function () {
       // 读取本地缓存
-      if(localStorage.getItem("location_date") !== null){
+      if (localStorage.getItem("location_date") !== null) {
         var location_date = eval("clock.worldDates." + localStorage.getItem("location_date"));
-        clock.date = function () {return location_date()};
+        clock.date = function () {
+          return location_date()
+        };
 
         var $lis = $('.worldDates li');
-        for (var i=0;i<$lis.length;i++){
-          if($lis.eq(i).data("date") === localStorage.getItem("location_date")){
+        for (var i = 0; i < $lis.length; i++) {
+          if ($lis.eq(i).data("date") === localStorage.getItem("location_date")) {
             $lis.eq(i).addClass("cur").siblings(".cur").removeClass("cur");
             $lis.parent().siblings("h3").html($lis.eq(i).html());
           }
@@ -146,48 +154,60 @@
       }
     },
 
+    click: function ($el) {
+      // 点击地区时间项
+      $el = $el || clock.$el;
+
+      $el.find('.worldDates li').click(function () {
+        var $this = $(this);
+
+        // 时钟改变
+        clearInterval(clock.timer);
+        var date = eval('clock.worldDates.' + $this.data('date'));
+        clock.date = function () {
+          return date()
+        };
+        clock.timer = setInterval(clock.active, 10);
+
+        localStorage.setItem("location_date", $this.data('date'));
+
+        $this.addClass('cur').siblings('.cur').removeClass('cur');
+        $this.parent().siblings('h3').html($this.html());
+      });
+    },
+
+    worldDates_list: function ($el) {
+      $el = $el || clock.$el;
+      // 显示隐藏地区时间列表
+      $el.find('.worldDates')
+        .mouseenter(function () {
+          $(this).addClass('cur').find('ul').stop().slideDown(300);
+        })
+        .mouseleave(function () {
+          var $this = $(this);
+          $this.find('ul').stop().slideUp(300, function () {
+            $this.removeClass('cur')
+          });
+        });
+    },
+
     active: function () {
+      // 时钟进行时(循环)
       var date = clock.date();
       clock.time(date);
       clock.msg(date);
+    },
+
+    start: function () {
+      // 启动时钟
+      clock.location_date();
+      clock.active();
+      clock.worldDates_list();
+      clock.click();
+      clock.timer = setInterval(clock.active, 10);
     }
   };
 
-
-
-
-  // 启动时钟
-  clock.location_date();
-  clock.active();
-  var t = setInterval(clock.active, 10);
-
-
-  // 点击地区时间项
-  $('.worldDates li').click(function () {
-    var $this = $(this);
-    clearInterval(t);
-    var date = eval('clock.worldDates.' + $this.data('date'));
-    clock.date = function () {return date()};
-    t = setInterval(clock.active, 10);
-
-    localStorage.setItem("location_date",$this.data('date'));
-
-    $this.addClass('cur').siblings('.cur').removeClass('cur');
-    $this.parent().siblings('h3').html($this.html());
-  });
-
-
-  // 显示隐藏地区时间列表
-  $('.worldDates')
-    .mouseenter(function () {
-      $(this).addClass('cur').find('ul').stop().slideDown(300);
-    })
-    .mouseleave(function () {
-      var $this = $(this);
-      $this.find('ul').stop().slideUp(300,function(){
-        $this.removeClass('cur')
-      });
-    });
-
+  clock.start();
 
 })();
